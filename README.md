@@ -1,11 +1,11 @@
-# Homework4ER302
+# ER302NFCReaderApp
 Sample Java application for communicate with ER302 (YHY523U) over serial port (JSSC library).
-Tested on Ubuntu Linux 17.10 and Windows 10.
+Tested on Ubuntu Linux 17.10/24.04 and Windows 10/11.
 
 # Build
 Use maven: mvn clean package
 
 # Run
-target > java -jar Homework4NFCSerialReader-1.0-SNAPSHOT.jar
+target > java -jar ER302NFCReaderApp-1.0-SNAPSHOT.jar
 
 (sponsored by https://nfcshop.hu/)
