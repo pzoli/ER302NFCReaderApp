@@ -1,5 +1,5 @@
 # ER302NFCReaderApp
-Sample Java application for communicate with ER302 (YHY523U) over serial port (JSSC library).
+Sample JavaSE 1.8 JavaFX application for communicate with ER302 (YHY523U) over serial port (JSSC library).
 Tested on Ubuntu Linux 17.10/24.04 and Windows 10/11.
 
 # Build
