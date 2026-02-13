@@ -412,8 +412,12 @@ public class FXMLController implements Initializable, jssc.SerialPortEventListen
             addCommand(new ER302Driver.CommandStruct(7 + (2 * state), "Auth2", auth2((char) 7)));
             state++;
         } else if (Arrays.equals(result.cmd, ER302Driver.CMD_MIFARE_READ_BALANCE)) {
-            int value = ER302Driver.byteArrayToInteger(result.data, false);
-            log("Read balance decimal(" + value + ")");
+            try {
+                int value = ER302Driver.byteArrayToInteger(result.data, false);
+                log("Read balance decimal(" + value + ")");
+            } catch (IndexOutOfBoundsException ex) {
+                log(ex.getMessage());
+            }
             addCommand(new ER302Driver.CommandStruct(7 + (2 * state), "Auth", auth2((char) 7)));
             state++;
         } else if (Arrays.equals(result.cmd, ER302Driver.CMD_MIFARE_READ_BLOCK)) {
