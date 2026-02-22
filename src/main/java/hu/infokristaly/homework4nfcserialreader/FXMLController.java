@@ -48,7 +48,6 @@ public class FXMLController implements Initializable, jssc.SerialPortEventListen
     private byte state = 0;
 
     private Queue<ER302Driver.CommandStruct> commands = new LinkedList<ER302Driver.CommandStruct>();
-    private Map<Integer, ER302Driver.CommandStruct> commandMap = new HashMap<Integer, ER302Driver.CommandStruct>();
 
     private enum LED {
         RED, BLUE, OFF
@@ -229,13 +228,13 @@ public class FXMLController implements Initializable, jssc.SerialPortEventListen
         try {
             logArea.clear();
             state = 0;
-            byte[] statusMsg = buildCommand(ER302Driver.CMD_WORKING_STATUS, new byte[]{0x01, 0x23});
-            lastCommand = new ER302Driver.CommandStruct(0, "Working status", statusMsg);
-            commandMap.put(0, lastCommand);
+            byte[] beepMsg = beep((byte) 50);
+            lastCommand = new ER302Driver.CommandStruct(0, "Beep", beepMsg);
+            
             addCommand(new ER302Driver.CommandStruct(1, "Firmware version", readFirmware()));
             addCommand(new ER302Driver.CommandStruct(2, "MiFare request", mifareRequest()));
 
-            serialPort.writeBytes(statusMsg);
+            serialPort.writeBytes(beepMsg);
         } catch (SerialPortException ex) {
             Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
             log(ex.getMessage());
@@ -446,7 +445,6 @@ public class FXMLController implements Initializable, jssc.SerialPortEventListen
     }
 
     private void addCommand(ER302Driver.CommandStruct cmd) {
-        commandMap.put(cmd.id, cmd);
         commands.add(cmd);
     }
 
